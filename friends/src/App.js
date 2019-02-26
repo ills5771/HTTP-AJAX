@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
+import FriendForm from "./components/FriendForm";
 
 class App extends Component {
   constructor() {
@@ -29,7 +30,10 @@ class App extends Component {
       email: this.state.email
     };
     this.setState({
-      friends: { ...this.state.friends, newFriend }
+      friends: [...this.state.friends, newFriend],
+      name: "",
+      age: "",
+      email: ""
     });
   };
   onChange = ev => {
@@ -46,28 +50,7 @@ class App extends Component {
             {friend.name}
           </div>
         ))}
-        <form>
-          <input
-            type="text"
-            placeholder="Name"
-            name="name"
-            value={this.state.name}
-          />
-          <input
-            type="text"
-            placeholder="Age"
-            name="age"
-            value={this.state.age}
-          />
-          <input
-            type="text"
-            placeholder="Email"
-            name="email"
-            value={this.state.email}
-          />
-
-          <button>Add</button>
-        </form>
+        <FriendForm />
       </div>
     );
   }
