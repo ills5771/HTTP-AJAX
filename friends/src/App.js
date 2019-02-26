@@ -50,7 +50,12 @@ class App extends Component {
             {friend.name}
           </div>
         ))}
-        <FriendForm />
+        <FriendForm
+          addFriend={this.addFriend}
+          name={this.state.name}
+          age={this.state.age}
+          email={this.state.email}
+        />
       </div>
     );
   }
