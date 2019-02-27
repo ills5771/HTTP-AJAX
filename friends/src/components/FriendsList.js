@@ -1,10 +1,10 @@
 import React from "react";
 import Friend from "./Friend";
 
-function FriendsList() {
+function FriendsList(props) {
   return (
     <div className="friends-list">
-      {this.state.friends.map(friend => (
+      {props.friends.map(friend => (
         <Friend key={friend.id} friend={friend} />
       ))}
     </div>

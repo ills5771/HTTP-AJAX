@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
 import FriendForm from "./components/FriendForm";
+import FriendsList from "./components/FriendsList";
 
 class App extends Component {
   constructor() {
@@ -45,8 +46,10 @@ class App extends Component {
     return (
       <div className="App">
         <h1>My Friends</h1>
-        ))}
+        <FriendsList friends={this.state.friends} />
+
         <FriendForm
+          onChange={this.onChange}
           addFriend={this.addFriend}
           name={this.state.name}
           age={this.state.age}
