@@ -35,7 +35,11 @@ function FriendsList(props) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="large" color="secondary">
+          <Button
+            onClick={ev => props.deleteFriend(ev, props.id)}
+            size="large"
+            color="secondary"
+          >
             Delete
           </Button>
           <Button size="large" color="primary">

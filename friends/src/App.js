@@ -30,14 +30,33 @@ class App extends Component {
       age: this.state.age,
       email: this.state.email
     };
-    axios.post("http://localhost:5000/friends", newFriend).then(res => {
-      this.setState({
-        friends: res.data,
-        name: "",
-        age: "",
-        email: ""
+    axios
+      .post("http://localhost:5000/friends", newFriend)
+      .then(res => {
+        this.setState({
+          friends: res.data,
+          name: "",
+          age: "",
+          email: ""
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
-    });
+  };
+
+  deleteFriend = (ev, id) => {
+    ev.preventDefault();
+    axios
+      .delete(`http://localhost:5000/friends/${id}`)
+      .then(res => {
+        this.setState({
+          friends: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
   onChange = ev => {
     this.setState({
@@ -61,6 +80,7 @@ class App extends Component {
             age={friend.age}
             name={friend.name}
             email={friend.email}
+            deleteFriend={this.deleteFriend}
           />
         ))}
       </div>
