@@ -30,11 +30,13 @@ class App extends Component {
       age: this.state.age,
       email: this.state.email
     };
-    this.setState({
-      friends: [...this.state.friends, newFriend],
-      name: "",
-      age: "",
-      email: ""
+    axios.post("http://localhost:5000/friends", newFriend).then(res => {
+      this.setState({
+        friends: res.data,
+        name: "",
+        age: "",
+        email: ""
+      });
     });
   };
   onChange = ev => {
@@ -45,9 +47,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>My Friends</h1>
-        <FriendsList friends={this.state.friends} />
-
         <FriendForm
           onChange={this.onChange}
           addFriend={this.addFriend}
@@ -55,6 +54,15 @@ class App extends Component {
           age={this.state.age}
           email={this.state.email}
         />
+
+        {this.state.friends.map(friend => (
+          <FriendsList
+            id={friend.id}
+            age={friend.age}
+            name={friend.name}
+            email={friend.email}
+          />
+        ))}
       </div>
     );
   }

@@ -25,7 +25,7 @@ function FriendForm(props) {
         onChange={props.onChange}
       />
 
-      <button>Add</button>
+      <button style={{ background: "white" }}>Add Friend</button>
     </form>
   );
 }
