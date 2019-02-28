@@ -9,9 +9,11 @@ class App extends Component {
     super();
     this.state = {
       friends: [],
-      name: "",
-      age: "",
-      email: ""
+      friend: {
+        name: "",
+        age: null,
+        email: ""
+      }
     };
   }
   componentDidMount() {
@@ -25,19 +27,17 @@ class App extends Component {
   }
   addFriend = ev => {
     ev.preventDefault();
-    const newFriend = {
-      name: this.state.name,
-      age: this.state.age,
-      email: this.state.email
-    };
+
     axios
-      .post("http://localhost:5000/friends", newFriend)
+      .post("http://localhost:5000/friends", this.state.friend)
       .then(res => {
         this.setState({
           friends: res.data,
-          name: "",
-          age: "",
-          email: ""
+          friend: {
+            name: "",
+            age: "",
+            email: ""
+          }
         });
       })
       .catch(err => {
@@ -58,9 +58,16 @@ class App extends Component {
         console.log(err);
       });
   };
+  updateFriend = (ev, id) => {
+    ev.preventDefault();
+    this.setState({});
+  };
   onChange = ev => {
     this.setState({
-      [ev.target.name]: ev.target.value
+      friend: {
+        ...this.state.friend,
+        [ev.target.name]: ev.target.value
+      }
     });
   };
   render() {
@@ -69,9 +76,7 @@ class App extends Component {
         <FriendForm
           onChange={this.onChange}
           addFriend={this.addFriend}
-          name={this.state.name}
-          age={this.state.age}
-          email={this.state.email}
+          friend={this.state.friend}
         />
 
         {this.state.friends.map(friend => (
@@ -81,6 +86,7 @@ class App extends Component {
             name={friend.name}
             email={friend.email}
             deleteFriend={this.deleteFriend}
+            updateFriend={this.updateFriend}
           />
         ))}
       </div>

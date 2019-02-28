@@ -7,21 +7,21 @@ function FriendForm(props) {
         type="text"
         placeholder="Name"
         name="name"
-        value={props.name}
+        value={props.friend.name}
         onChange={props.onChange}
       />
       <input
-        type="text"
+        type="number"
         placeholder="Age"
         name="age"
-        value={props.age}
+        value={props.friend.age}
         onChange={props.onChange}
       />
       <input
         type="text"
         placeholder="Email"
         name="email"
-        value={props.email}
+        value={props.friend.email}
         onChange={props.onChange}
       />
 

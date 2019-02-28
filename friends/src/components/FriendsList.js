@@ -42,7 +42,11 @@ function FriendsList(props) {
           >
             Delete
           </Button>
-          <Button size="large" color="primary">
+          <Button
+            onClick={ev => props.updateFriend(ev, props.id)}
+            size="large"
+            color="primary"
+          >
             Update
           </Button>
         </CardActions>
