@@ -14,7 +14,7 @@ function FriendsList(props) {
       <Card className="card">
         <CardActionArea>
           <img
-            style={{ width: "250px", height: "250px" }}
+            style={{ width: "auto", height: "200px" }}
             src={props.imgUrl}
             alt={props.imgUrl}
           />
