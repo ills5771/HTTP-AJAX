@@ -14,7 +14,7 @@ function FriendsList(props) {
       <Card className="card">
         <CardActionArea>
           <img
-            style={{ width: "auto", height: "200px" }}
+            style={{ width: "100%", height: "150px" }}
             src={props.imgUrl}
             alt={props.imgUrl}
           />
@@ -25,7 +25,9 @@ function FriendsList(props) {
             <Typography component="p">{props.email}</Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>
+        <CardActions
+          style={{ display: "flex", justifyContent: "space-evenly" }}
+        >
           <Button
             onClick={ev => props.deleteFriend(ev, props.id)}
             size="large"
