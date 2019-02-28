@@ -12,8 +12,10 @@ class App extends Component {
       friend: {
         name: "",
         age: null,
-        email: ""
-      }
+        email: "",
+        imgUrl: ""
+      },
+      isUpdating: false
     };
   }
   componentDidMount() {
@@ -25,9 +27,7 @@ class App extends Component {
       })
       .catch(err => console.log(err));
   }
-  addFriend = ev => {
-    ev.preventDefault();
-
+  addFriend = () => {
     axios
       .post("http://localhost:5000/friends", this.state.friend)
       .then(res => {
@@ -36,7 +36,8 @@ class App extends Component {
           friend: {
             name: "",
             age: "",
-            email: ""
+            email: "",
+            imgUrl: ""
           }
         });
       })
@@ -58,10 +59,37 @@ class App extends Component {
         console.log(err);
       });
   };
-  updateFriend = (ev, id) => {
+  updateForm = (ev, id) => {
     ev.preventDefault();
-    this.setState({});
+    this.setState({
+      friend: this.state.friends.find(friend => friend.id === id),
+      isUpdating: true
+    });
   };
+
+  updateFriend = () => {
+    axios
+      .put(
+        `http://localhost:5000/friends/${this.state.friend.id}`,
+        this.state.friend
+      )
+      .then(res => {
+        this.setState({
+          friends: res.data,
+          isUpdating: false,
+          friend: {
+            name: "",
+            age: "",
+            email: "",
+            imgUrl: ""
+          }
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   onChange = ev => {
     this.setState({
       friend: {
@@ -76,17 +104,22 @@ class App extends Component {
         <FriendForm
           onChange={this.onChange}
           addFriend={this.addFriend}
+          updateForm={this.updateForm}
+          updateFriend={this.updateFriend}
           friend={this.state.friend}
+          isUpdating={this.state.isUpdating}
         />
 
         {this.state.friends.map(friend => (
           <FriendsList
+            imgUrl={friend.imgUrl}
+            key={friend.id}
             id={friend.id}
             age={friend.age}
             name={friend.name}
             email={friend.email}
             deleteFriend={this.deleteFriend}
-            updateFriend={this.updateFriend}
+            updateForm={this.updateForm}
           />
         ))}
       </div>

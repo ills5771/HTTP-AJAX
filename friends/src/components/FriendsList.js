@@ -1,19 +1,5 @@
-// import React from "react";
-// import Friend from "./Friend";
-
-// function FriendsList(props) {
-//   return (
-//     <div>
-//       {props.friends.map(friend => (
-//         <Friend key={friend.id} friend={friend} />
-//       ))}
-//     </div>
-//   );
-// }
-// export default FriendsList;
-
 import React from "react";
-
+// import CardMedia from "@material-ui/core/CardMedia";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -27,6 +13,11 @@ function FriendsList(props) {
     <div className="container">
       <Card className="card">
         <CardActionArea>
+          <img
+            style={{ width: "250px", height: "250px" }}
+            src={props.imgUrl}
+            alt={props.imgUrl}
+          />
           <CardContent style={{ background: "#e0e0e0" }}>
             <Typography gutterBottom variant="h5" component="h2">
               {props.name}, {props.age}
@@ -43,7 +34,7 @@ function FriendsList(props) {
             Delete
           </Button>
           <Button
-            onClick={ev => props.updateFriend(ev, props.id)}
+            onClick={ev => props.updateForm(ev, props.id)}
             size="large"
             color="primary"
           >

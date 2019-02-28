@@ -1,8 +1,16 @@
 import React from "react";
 
 function FriendForm(props) {
+  function handleSubmit(ev) {
+    ev.preventDefault();
+    if (props.isUpdating) {
+      props.updateFriend();
+    } else {
+      props.addFriend();
+    }
+  }
   return (
-    <form onSubmit={props.addFriend}>
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Name"
@@ -24,8 +32,17 @@ function FriendForm(props) {
         value={props.friend.email}
         onChange={props.onChange}
       />
+      <input
+        type="text"
+        placeholder="Image Url"
+        name="imgUrl"
+        value={props.friend.imgUrl}
+        onChange={props.onChange}
+      />
 
-      <button style={{ background: "white" }}>Add Friend</button>
+      <button style={{ background: "white" }}>
+        {props.isUpdating ? "Update" : "Add Friend"}
+      </button>
     </form>
   );
 }
